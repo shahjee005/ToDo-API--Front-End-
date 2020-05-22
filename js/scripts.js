@@ -1,18 +1,41 @@
-// Grap the index list of all todoes
-const allToDos = document.getElementById('index');
-//run axios to obtain list
-if (allToDos){axios.get('https://localhost:44300/api/ToDoItems/')
-//get just the data from response 
-.then(response => response.data)
-//process our data (json object or array)
-.then (data=> {
-    console.log(data);
-    //output list of todos
-    // data.forEach(element => {
-        
-    // });
-})
+// Grab the index list of all todos.
+const allToDos = document.getElementById( 'index' );
+// If available, proceed.
+if ( allToDos )
+{ // Run Axios to obtain list.
+  axios.get( 'https://localhost:44300/api/ToDoItems/' )
+    // Get just the data from the response.
+    .then( response => response.data )
+    // "Process" our data (JSON object or array.)
+    .then( data => {
+      console.log( data );
+      // Output list of todos.
+      // data.forEach( toDo => {
+
+      // } );
+    } );
 }
 
-// Grap the "create" ToDo form
-const createToDos = document.getElementById('create');
+// Grab the "create" ToDo form.
+const createToDo = document.getElementById( 'create' );
+// If there is a "create" ToDo form, proceed...
+if ( createToDo )
+{ // Listen for submission.
+  createToDo.addEventListener( 'submit', event => {
+    event.preventDefault(); // Stop form from real submit.
+    // Retrieve form field values.
+    const newTask = document.getElementById( 'task' ).value;
+    const newCompleted = document.getElementById( 'completed' ).checked;
+    // Create the new todo.
+    axios.post( 'https://localhost:44300/api/ToDoItems/', {
+      Task: newTask,
+      Completed: newCompleted
+    } )
+      .then( response => { // On success, redirect to full list.
+        document.location.href = './index.html';
+      } )
+      .catch( error => {
+        console.log( error );
+      } );
+  } );
+}
