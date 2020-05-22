@@ -6,9 +6,13 @@ if (allToDos){axios.get('https://localhost:44300/api/ToDoItems/')
 .then(response => response.data)
 //process our data (json object or array)
 .then (data=> {
+    console.log(data);
     //output list of todos
     // data.forEach(element => {
         
     // });
 })
 }
+
+// Grap the "create" ToDo form
+const createToDos = document.getElementById('create');
