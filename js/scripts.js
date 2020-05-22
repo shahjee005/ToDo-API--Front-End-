@@ -8,12 +8,16 @@ if ( allToDos )
     .then( response => response.data )
     // "Process" our data (JSON object or array.)
     .then( data => {
-      console.log( data );
-      // Output list of todos.
-      // data.forEach( toDo => {
-
-      // } );
+      // console.log( data );
+      data.forEach( toDo => { // Output list of todos.
+        const toDoLI = document.createElement( 'LI' );toDoLI.textContent = ' ' + toDo.task;
+        const toDoCheckbox = document.createElement( 'INPUT' );
+        toDoCheckbox.type = 'checkbox';
+        toDoLI.prepend( toDoCheckbox );
+        allToDos.appendChild( toDoLI );
+      } );
     } );
+
 }
 
 // Grab the "create" ToDo form.
